@@ -7,11 +7,18 @@ function Shortener() {
   const [longURL, setLongURL] = useState("");
   const [shortURL, setShortURL] = useState("");
 
+    // Get the base URL dynamically
+    const getBaseURL = () => {
+      const { protocol, hostname, port } = window.location;
+      return `${protocol}//${hostname}:${port}`;
+    };
+
   const handleSubmit = async (e) => {
     e.preventDefault();
     // Fetch the shortened URL
     try {
-      const response = await fetch(`http://0.0.0.0:8080/shorten?url=${longURL}`);
+      const baseURL = getBaseURL();
+      const response = await fetch(`${baseURL}/shorten?url=${longURL}`);
       if (!response.ok) {
         throw new Error("Network response was not ok");
       }
