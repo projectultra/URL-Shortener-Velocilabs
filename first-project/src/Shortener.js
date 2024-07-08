@@ -30,6 +30,15 @@ function Shortener() {
     }
   };
 
+  // Function to copy the shortened URL to the clipboard
+  const handleCopy = () => {
+    navigator.clipboard.writeText(shortURL).then(() => {
+      alert("Shortened URL copied to clipboard!");
+    }).catch(err => {
+      console.error("Failed to copy:", err);
+    });
+  };
+
   return (
     <div>
       <form onSubmit={handleSubmit}>
@@ -45,6 +54,9 @@ function Shortener() {
         // Display the shortened URL if it exists
         <div>
           Shortened URL: <a href={shortURL}>{shortURL}</a>
+          <br>
+          </br>
+          <button onClick={handleCopy}>Click to Copy</button>
         </div>
       )}
     </div>
